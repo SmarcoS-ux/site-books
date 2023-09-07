@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Axios from 'axios';
 import './index.css';
@@ -29,9 +29,9 @@ class App extends Component {
         } catch (error){
             console.log(error);
 
-            document
+            /*document
                 .querySelectorAll(".principal")[0]
-                .queryAdjacentHTML("beforeend", "<p class='erro'>Mensagem de Erro.</p>");
+                .queryAdjacentHTML("beforeend", "<p class='erro'>Mensagem de Erro.</p>");*/
         }
     }
 
@@ -46,13 +46,19 @@ class App extends Component {
                         <Route exact path="/programacao" element={<Programacao livros={this.state.livros}/>}/>
                         <Route exact path="/design" element={<Design livros={this.state.livros}/>}/>
                         <Route exact path="/catalogo" element={<Catalogo livros={this.state.livros}/>}/>
-                        <Route path="/livros/:livroSlug" render={props => {
+                        <Route path="/livros/:livroSlug" element={(props) => {
                             const livro = this.state.livros.find(
-                                livro => livro.slug === props.match.params.livroSlug
-                            );
-                            if (livro) return <Livro livro={livro}/>;
-                            else return <NotFound/>
-                        }}/>
+                                (livro) => livro.slug === props.match.params.livroSlug
+                                );
+                            if (livro){
+                                console.log(livro);
+                                return <Livro livros={livro}/>
+                        
+                            } else 
+                                console.log(livro);
+                                return <NotFound/>;
+                        }}
+                        />
                         <Route path="*" element={<NotFound/>}/>
                     </Routes>  
                     <Rodape/>         
