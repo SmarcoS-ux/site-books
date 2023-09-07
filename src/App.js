@@ -53,7 +53,7 @@ class App extends Component {
                             if (livro) return <Livro livro={livro}/>;
                             else return <NotFound/>
                         }}/>
-                        <Route path="*" element={<NotFound/>}/>
+                        /*<Route path="*" element={<NotFound/>}/>*/
                     </Routes>  
                     <Rodape/>         
                 </>
